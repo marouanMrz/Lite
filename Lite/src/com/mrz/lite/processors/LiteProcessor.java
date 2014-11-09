@@ -1,5 +1,6 @@
 package com.mrz.lite.processors;
 
+import java.io.IOException;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -11,8 +12,11 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
+import javax.tools.JavaFileObject;
 
 import com.mrz.lite.annotations.LiteEntity;
+import com.mrz.lite.generators.DefaultGenerator;
+import com.mrz.lite.generators.Generator;
 
 @SupportedAnnotationTypes({"com.mrz.lite.annotations.LiteEntity"})
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
@@ -39,7 +43,15 @@ public class LiteProcessor extends AbstractProcessor {
 				packageName = packageElement.getQualifiedName().toString();
 			}
 		}
-
+		JavaFileObject jfo = null;
+		try {
+			jfo = processingEnv.getFiler().createSourceFile("DataBaseContract");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		Generator generator = new DefaultGenerator();
+		generator.generate(jfo, className, packageName, fullQualifiedClassName);
+		
 		return false;
 	}
 
