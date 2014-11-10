@@ -59,7 +59,7 @@ public class LiteProcessor extends AbstractProcessor {
 					fieldModel.setType(field.getType());
 					fields.add(fieldModel);
 				}
-				entityModel.setMembers(fields);
+				entityModel.setFields(fields);
 			}
 		}
 		JavaFileObject jfo = null;
