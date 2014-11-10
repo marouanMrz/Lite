@@ -6,17 +6,17 @@ public class EntityModel {
 	private String className;
 	private String packageName;
 	private String fullQualifiedClassName;
-	private List<FieldModel> members; 
+	private List<FieldModel> fields; 
 	
 	public EntityModel() {
 	}
 
 	public EntityModel(String className, String packageName,
-			String fullQualifiedClassName, List<FieldModel> members) {
+			String fullQualifiedClassName, List<FieldModel> fields) {
 		this.className = className;
 		this.packageName = packageName;
 		this.fullQualifiedClassName = fullQualifiedClassName;
-		this.members = members;
+		this.fields = fields;
 	}
 
 	public String getClassName() {
@@ -43,12 +43,12 @@ public class EntityModel {
 		this.fullQualifiedClassName = fullQualifiedClassName;
 	}
 
-	public List<FieldModel> getMembers() {
-		return members;
+	public List<FieldModel> getFields() {
+		return fields;
 	}
 
-	public void setMembers(List<FieldModel> members) {
-		this.members = members;
+	public void setFields(List<FieldModel> fields) {
+		this.fields = fields;
 	}
 	
 }
