@@ -21,7 +21,7 @@ public class DefaultGenerator implements Generator {
 			bw.append("import android.provider.BaseColumns;");
 			bw.newLine();
 			bw.newLine();
-			bw.append("public static abstract class " + entityModel.getClassName() + "Contract implements BaseColumns" + "{");
+			bw.append("public abstract class " + entityModel.getClassName() + "Contract implements BaseColumns" + " {");
 			bw.newLine();
 			bw.newLine();
 			bw.append("    public static final String TABLE_NAME = \"" + entityModel.getClassName() + "\";");
@@ -32,6 +32,7 @@ public class DefaultGenerator implements Generator {
 				bw.append("    public static final " + field.getType().toString() + " " + field.getName().toUpperCase() + " = \"" + field.getName() + "\";");
 				bw.newLine();
 			}
+			bw.newLine();
 			bw.append("}");
 			bw.close();
 		} catch (Exception e) {
