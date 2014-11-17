@@ -52,7 +52,8 @@ public class LiteProcessor extends AbstractProcessor {
 		}
 		JavaFileObject jfo = null;
 		try {
-			jfo = processingEnv.getFiler().createSourceFile(entityModel.getFullQualifiedClassName()+"Contract");
+			String fqClassName = generateDbPackage(entityModel.getFullQualifiedClassName());
+			jfo = processingEnv.getFiler().createSourceFile(fqClassName + "Contract");
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -90,5 +91,28 @@ public class LiteProcessor extends AbstractProcessor {
 			fields.add(fieldModel);
 		}
 		return fields;
+	}
+	
+	/**
+	 * Generate a separated package for SQLite Management 
+	 * @param fullQualifiedClassName
+	 * @return Full qualified class name in a separated package
+	 */
+	private String generateDbPackage(String fullQualifiedClassName){
+		String[] fqcn = fullQualifiedClassName.split("\\.");
+		StringBuffer packageName = new StringBuffer();
+		if (fqcn.length == 2) {
+			packageName.append("db");
+			packageName.append("." + fqcn[fqcn.length - 1]);
+		}
+		else {
+			for (int i = 0; i < fqcn.length - 2; i++) {
+				if(i == 0) packageName.append(fqcn[i]);
+				else packageName.append("."+fqcn[i]);
+			}
+			packageName.append(".db");
+			packageName.append("." + fqcn[fqcn.length - 1]);
+		} 
+		return packageName.toString();
 	}
 }
