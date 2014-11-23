@@ -61,7 +61,7 @@ public class DefaultGenerator implements Generator {
 			bw.newLine();
 			bw.append("@LiteHelper");
 			bw.newLine();
-			bw.append("public abstract class " + entityModel.getClassName() + "Contract implements BaseColumns" + " {");
+			bw.append("public class " + entityModel.getClassName() + "Contract implements BaseColumns" + " {");
 			bw.newLine();
 			bw.append("    public static final String TABLE_NAME = \"" + entityModel.getClassName() + "\";");
 			bw.newLine();
