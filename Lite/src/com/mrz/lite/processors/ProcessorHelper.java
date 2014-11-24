@@ -12,7 +12,11 @@ import com.mrz.lite.models.FieldModel;
 
 public class ProcessorHelper {
 	
-	
+	/**
+	 * Generate a full qualified class name for Helper 
+	 * @param fullQualifiedClassName
+	 * @return Full qualified class name in a separated package (db package)
+	 */
 	public static String generateLiteHelperFullQualifiedClassName(String fullQualifiedClassName){
 		return fullQualifiedClassName.substring(0, fullQualifiedClassName.lastIndexOf("Contract"));
 	}
