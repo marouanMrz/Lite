@@ -12,7 +12,6 @@ import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeKind;
@@ -43,16 +42,15 @@ public class LiteProcessor extends AbstractProcessor {
 			if (e.getKind() == ElementKind.CLASS) {
 				entityModel = new EntityModel();
 				TypeElement classElement = (TypeElement) e;
-				PackageElement packageElement = (PackageElement) classElement.getEnclosingElement();
-				entityModel.setPackageName(packageElement.getQualifiedName().toString());
-				entityModel.setFullQualifiedClassName(classElement.getQualifiedName().toString());
+				entityModel.setFullQualifiedClassName(generateFullQualifiedClassName(classElement.getQualifiedName().toString()));
+				entityModel.setPackageName(generateDbPackage(entityModel.getFullQualifiedClassName()));
 				entityModel.setClassName(classElement.getSimpleName().toString());
 				entityModel.setFields(fieldsMapper(classElement));
 			}
 		}
 		JavaFileObject jfo = null;
 		try {
-			String fqClassName = generateDbPackage(entityModel.getFullQualifiedClassName());
+			String fqClassName = entityModel.getFullQualifiedClassName();
 			jfo = processingEnv.getFiler().createSourceFile(fqClassName + "Contract");
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -62,6 +60,7 @@ public class LiteProcessor extends AbstractProcessor {
 		return true;
 	}
 	
+
 	/**
 	 * Return the simple name of field type
 	 * @param fieldType qualified name of type
@@ -94,11 +93,11 @@ public class LiteProcessor extends AbstractProcessor {
 	}
 	
 	/**
-	 * Generate a separated package for SQLite Management 
+	 * Generate a full qualified class for SQLite Management 
 	 * @param fullQualifiedClassName
 	 * @return Full qualified class name in a separated package
 	 */
-	private String generateDbPackage(String fullQualifiedClassName){
+	private String generateFullQualifiedClassName(String fullQualifiedClassName){
 		String[] fqcn = fullQualifiedClassName.split("\\.");
 		StringBuffer packageName = new StringBuffer();
 		if (fqcn.length == 2) {
@@ -114,5 +113,14 @@ public class LiteProcessor extends AbstractProcessor {
 			packageName.append("." + fqcn[fqcn.length - 1]);
 		} 
 		return packageName.toString();
+	}
+	
+	/**
+	 * Generate a separated package for SQLite Management 
+	 * @param fullQualifiedClassName
+	 * @return Package for SQLite Management
+	 */
+	private String generateDbPackage(String fullQualifiedClassName) {
+		return fullQualifiedClassName.substring(0, fullQualifiedClassName.lastIndexOf("."));
 	}
 }
