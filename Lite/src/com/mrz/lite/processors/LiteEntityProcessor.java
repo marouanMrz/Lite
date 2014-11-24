@@ -26,10 +26,10 @@ import com.mrz.lite.models.FieldModel;
 
 @SupportedAnnotationTypes({"com.mrz.lite.annotations.LiteEntity"})
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
-public class LiteProcessor extends AbstractProcessor {
+public class LiteEntityProcessor extends AbstractProcessor {
 	private EntityModel entityModel;
 	
-	public LiteProcessor() {
+	public LiteEntityProcessor() {
 		super();
 	}
 
