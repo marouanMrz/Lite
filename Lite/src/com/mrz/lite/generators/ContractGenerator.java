@@ -7,7 +7,7 @@ import javax.tools.JavaFileObject;
 import com.mrz.lite.models.EntityModel;
 import com.mrz.lite.models.FieldModel;
 
-public class DefaultGenerator implements Generator {
+public class ContractGenerator implements Generator {
     
 	@Override
 	public void generate(JavaFileObject jfo, EntityModel entityModel) {

@@ -19,7 +19,7 @@ import javax.lang.model.util.ElementFilter;
 import javax.tools.JavaFileObject;
 
 import com.mrz.lite.annotations.LiteEntity;
-import com.mrz.lite.generators.DefaultGenerator;
+import com.mrz.lite.generators.ContractGenerator;
 import com.mrz.lite.generators.Generator;
 import com.mrz.lite.models.EntityModel;
 import com.mrz.lite.models.FieldModel;
@@ -55,7 +55,7 @@ public class LiteProcessor extends AbstractProcessor {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		Generator generator = new DefaultGenerator();
+		Generator generator = new ContractGenerator();
 		generator.generate(jfo, entityModel);
 		return true;
 	}
