@@ -11,6 +11,11 @@ import javax.lang.model.util.ElementFilter;
 import com.mrz.lite.models.FieldModel;
 
 public class ProcessorHelper {
+	
+	
+	public static String generateLiteHelperFullQualifiedClassName(String fullQualifiedClassName){
+		return fullQualifiedClassName.substring(0, fullQualifiedClassName.lastIndexOf("Contract"));
+	}
 
 	/**
 	 * Retrieve typeElement fields to construct a list of FieldModel 
