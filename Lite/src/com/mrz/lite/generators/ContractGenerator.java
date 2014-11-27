@@ -54,12 +54,12 @@ public class ContractGenerator implements Generator {
 			bw.append(" */");
 			bw.newLine();
 			bw.newLine();
-			bw.append("import com.mrz.lite.annotations.LiteHelper;");
+			bw.append("import com.mrz.lite.annotations.LiteContract;");
 			bw.newLine();
 			bw.append("import android.provider.BaseColumns;");
 			bw.newLine();
 			bw.newLine();
-			bw.append("@LiteHelper");
+			bw.append("@LiteContract");
 			bw.newLine();
 			bw.append("public class " + entityModel.getClassName() + "Contract implements BaseColumns" + " {");
 			bw.newLine();
