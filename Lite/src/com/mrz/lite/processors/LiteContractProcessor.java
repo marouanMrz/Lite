@@ -14,7 +14,6 @@ import javax.lang.model.element.TypeElement;
 import javax.tools.JavaFileObject;
 
 import com.mrz.lite.annotations.LiteContract;
-import com.mrz.lite.annotations.LiteHelper;
 import com.mrz.lite.generators.Generator;
 import com.mrz.lite.generators.HelperGenerator;
 import com.mrz.lite.models.EntityModel;
