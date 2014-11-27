@@ -1,5 +1,6 @@
 package com.mrz.lite.processors;
 
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -82,5 +83,21 @@ public class ProcessorHelper {
 	 */
 	public static String generateDbPackage(String fullQualifiedClassName) {
 		return fullQualifiedClassName.substring(0, fullQualifiedClassName.lastIndexOf("."));
+	}
+	
+	/**
+	 * Return HashTable of fields and values
+	 * @param classElement TypeElement of kind CLASS
+	 * @return fields(key) and values(value)
+	 */
+	public static Hashtable<String, String> getFieldsValues(TypeElement classElement) {
+		Hashtable<String, String> fieldsValues = new Hashtable<>();
+		List<VariableElement> variableElements = ElementFilter.fieldsIn(classElement.getEnclosedElements());
+		for (VariableElement field : variableElements) {
+			if (field.asType().getKind() == TypeKind.DECLARED && field.asType().toString().contains("String")) {
+				fieldsValues.put(field.getSimpleName().toString(), field.getConstantValue().toString());
+			}
+		}
+		return fieldsValues;
 	}
 }
