@@ -1,5 +1,6 @@
 package com.mrz.lite.processors;
 
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
@@ -90,8 +91,8 @@ public class ProcessorHelper {
 	 * @param classElement TypeElement of kind CLASS
 	 * @return fields(key) and values(value)
 	 */
-	public static Hashtable<String, String> getFieldsValues(TypeElement classElement) {
-		Hashtable<String, String> fieldsValues = new Hashtable<>();
+	public static HashMap<String, String> getFieldsValues(TypeElement classElement) {
+		HashMap<String, String> fieldsValues = new HashMap<String, String>();
 		List<VariableElement> variableElements = ElementFilter.fieldsIn(classElement.getEnclosedElements());
 		for (VariableElement field : variableElements) {
 			if (field.asType().getKind() == TypeKind.DECLARED && field.asType().toString().contains("String")) {
