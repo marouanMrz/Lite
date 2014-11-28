@@ -49,6 +49,8 @@ public class HelperGenerator implements Generator {
 			bw.append(" */");
 			bw.newLine();
 			bw.newLine();
+			bw.append("@LiteHelper");
+			bw.newLine();
 			bw.append("public class " + entityModel.getClassName() + "LiteHelper" + " {");
 			bw.newLine();
 			bw.append("    private static final String TEXT_TYPE = \" TEXT\";");
