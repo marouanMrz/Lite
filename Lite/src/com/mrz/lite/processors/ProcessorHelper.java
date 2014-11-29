@@ -95,7 +95,7 @@ public class ProcessorHelper {
 		List<VariableElement> variableElements = ElementFilter.fieldsIn(classElement.getEnclosedElements());
 		for (VariableElement field : variableElements) {
 			if (field.asType().getKind() == TypeKind.DECLARED && field.asType().toString().toLowerCase().contains("string")) {
-				fieldsValues.put(field.getSimpleName().toString(), field.getConstantValue().toString());
+				fieldsValues.put(field.getSimpleName().toString(), (String) field.getConstantValue());
 			}
 		}
 		return fieldsValues;
