@@ -84,20 +84,5 @@ public class ProcessorHelper {
 	public static String generateDbPackage(String fullQualifiedClassName) {
 		return fullQualifiedClassName.substring(0, fullQualifiedClassName.lastIndexOf("."));
 	}
-	
-	/**
-	 * Return HashTable of fields and values
-	 * @param classElement TypeElement of kind CLASS
-	 * @return fields(key) and values(value)
-	 */
-	public static HashMap<String, String> getFieldsValues(TypeElement classElement) {
-		HashMap<String, String> fieldsValues = new HashMap<String, String>();
-		List<VariableElement> variableElements = ElementFilter.fieldsIn(classElement.getEnclosedElements());
-		for (VariableElement field : variableElements) {
-			if (field.asType().getKind() == TypeKind.DECLARED && field.asType().toString().toLowerCase().contains("string")) {
-				fieldsValues.put(field.getSimpleName().toString(), (String) field.getConstantValue());
-			}
-		}
-		return fieldsValues;
-	}
+
 }

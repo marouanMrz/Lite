@@ -49,8 +49,6 @@ public class HelperGenerator implements Generator {
 			bw.append(" */");
 			bw.newLine();
 			bw.newLine();
-			bw.append("@LiteHelper");
-			bw.newLine();
 			bw.append("public class " + entityModel.getClassName() + "LiteHelper" + " {");
 			bw.newLine();
 			bw.append("    private static final String TEXT_TYPE = \" TEXT\";");
@@ -61,8 +59,8 @@ public class HelperGenerator implements Generator {
 			bw.newLine();
 			bw.append("			\"CREATE TABLE \" + " + entityModel.getClassName() + "Contract.TABLE_NAME +" + "\" (\" +");
 			bw.newLine();
-			bw.append("			" + entityModel.getClassName() + "Contract._ID +" + "\" INTEGER PRIMARY KEY AUTOINCREMENT,\" +");
-			bw.newLine();
+//			bw.append("			" + entityModel.getClassName() + "Contract._ID +" + "\" INTEGER PRIMARY KEY AUTOINCREMENT,\" +");
+//			bw.newLine();
 			int size = entityModel.getFields().size();
 			for (int i = 0; i < size; i++) {
 				if (i + 1 == size) {
