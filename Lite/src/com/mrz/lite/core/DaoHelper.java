@@ -56,7 +56,7 @@ public class DaoHelper {
 		return statements;
 	}
 	
-	public static Hashtable<String, String> getCreateStatement(Hashtable<String, String> statement) {
+	public static Hashtable<String, String> getCreateStatements(Hashtable<String, String> statement) {
 		Hashtable<String, String> createStatements = new Hashtable<String, String>();
 		for (Map.Entry<String, String> statementEntry : statement.entrySet()) {
 			if (statementEntry.getKey().toLowerCase().contains("create")) {
@@ -66,7 +66,7 @@ public class DaoHelper {
 		return createStatements;
 	}
 	
-	public static Hashtable<String, String> getDeleteStatement(Hashtable<String, String> statement) {
+	public static Hashtable<String, String> getDeleteStatements(Hashtable<String, String> statement) {
 		Hashtable<String, String> deleteStatements = new Hashtable<String, String>();
 		for (Map.Entry<String, String> statementEntry : statement.entrySet()) {
 			if (statementEntry.getKey().toLowerCase().contains("delete")) {
