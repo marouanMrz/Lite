@@ -44,6 +44,8 @@ public class DaoGenerator implements Generator {
 			bw.newLine();
 			bw.append(" * @author Marouan Marzouga - MRz");
 			bw.newLine();
+			bw.append(" * marouan.mrz@gmail.com");
+			bw.newLine();
 			bw.append(" */");
 			bw.newLine();
 			bw.newLine();
