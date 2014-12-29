@@ -86,7 +86,7 @@ public class DaoGenerator implements Generator {
 			bw.newLine();
 			bw.newLine();
 			bw.newLine();
-			bw.append("    public LiteDao(Context context, Object setAlwaysThis) {");
+			bw.append("    public LiteDao(Context context) {");
 			bw.newLine();
 			bw.append("        super(context, DATABASE_NAME, null, DATABASE_VERSION);");
 			bw.newLine();
@@ -96,9 +96,9 @@ public class DaoGenerator implements Generator {
 			bw.newLine();
 			bw.append("        this.sqlStatements = new Hashtable<String, String>();");
 			bw.newLine();
-			bw.append("        this.uri = setAlwaysThis.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();");
+			bw.append("        this.uri = context.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();");
 			bw.newLine();
-			bw.append("        sqlStatements = DaoHelper.getStatements(this.uri, DaoHelper.format(setAlwaysThis.getClass().getCanonicalName()));");
+			bw.append("        sqlStatements = DaoHelper.getStatements(this.uri, DaoHelper.format(context.getClass().getCanonicalName()));");
 			bw.newLine();
 			bw.append("        sqlCreate = DaoHelper.getCreateStatements(sqlStatements);");
 			bw.newLine();
