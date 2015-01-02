@@ -6,7 +6,7 @@ import javax.tools.JavaFileObject;
 
 import com.mrz.lite.models.EntityModel;
 
-public class DaoGenerator implements Generator {
+public class CoreGenerator implements Generator {
 
 	@Override
 	public void generate(JavaFileObject jfo, EntityModel entityModel) {
@@ -36,9 +36,9 @@ public class DaoGenerator implements Generator {
 			bw.newLine();
 			bw.append(" * ");
 			bw.newLine();
-			bw.append(" * The LiteDao<T> generic class allows you to do CRUD");
+			bw.append(" * The LiteCore class allows you to build your ");
 			bw.newLine();
-			bw.append(" * operations on a specific entity.");
+			bw.append(" *  and maintain the database and tables.");
 			bw.newLine();
 			bw.append(" * ");
 			bw.newLine();
@@ -59,7 +59,7 @@ public class DaoGenerator implements Generator {
 			bw.newLine();
 			bw.append("import android.os.Build;");
 			bw.newLine();
-			bw.append("import com.mrz.lite.core.DaoHelper;");
+			bw.append("import com.mrz.lite.util.DaoHelper;");
 			bw.newLine();
 			bw.append("import java.util.Hashtable;");
 			bw.newLine();
@@ -68,7 +68,7 @@ public class DaoGenerator implements Generator {
 			bw.append("import java.util.Map;");
 			bw.newLine();
 			bw.newLine();
-			bw.append("public class LiteDao<T> extends SQLiteOpenHelper {");
+			bw.append("public class LiteCore extends SQLiteOpenHelper {");
 			bw.newLine();
 			bw.append("    private String uri;");
 			bw.newLine();
@@ -86,7 +86,7 @@ public class DaoGenerator implements Generator {
 			bw.newLine();
 			bw.newLine();
 			bw.newLine();
-			bw.append("    public LiteDao(Context context) {");
+			bw.append("    public LiteCore(Context context) {");
 			bw.newLine();
 			bw.append("        super(context, DATABASE_NAME, null, DATABASE_VERSION);");
 			bw.newLine();

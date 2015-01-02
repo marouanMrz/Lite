@@ -14,7 +14,7 @@ import javax.lang.model.element.TypeElement;
 import javax.tools.JavaFileObject;
 
 import com.mrz.lite.annotations.LiteContract;
-import com.mrz.lite.generators.DaoGenerator;
+import com.mrz.lite.generators.CoreGenerator;
 import com.mrz.lite.generators.Generator;
 import com.mrz.lite.generators.HelperGenerator;
 import com.mrz.lite.models.EntityModel;
@@ -44,18 +44,19 @@ public class LiteContractProcessor extends AbstractProcessor {
 			}
 		}
 		JavaFileObject jfoLiteHelper = null;
-		JavaFileObject jfoLiteDao = null;
+		JavaFileObject jfoLiteCore = null;
+		
 		try {
 			String fqClassName = entityModel.getFullQualifiedClassName();
 			jfoLiteHelper = processingEnv.getFiler().createSourceFile(fqClassName + "LiteHelper");
-			jfoLiteDao = processingEnv.getFiler().createSourceFile(entityModel.getPackageName() + ".LiteDao");
+			jfoLiteCore = processingEnv.getFiler().createSourceFile(entityModel.getPackageName() + ".LiteCore");
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 		Generator helperGenerator = new HelperGenerator();
 		helperGenerator.generate(jfoLiteHelper, entityModel);
-		Generator daoGenerator = new DaoGenerator();
-		daoGenerator.generate(jfoLiteDao, entityModel);
+		Generator coreGenerator = new CoreGenerator();
+		coreGenerator.generate(jfoLiteCore, entityModel);
 		return true;
 	}
 
