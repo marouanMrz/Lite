@@ -18,6 +18,7 @@ import com.mrz.lite.generators.DaoGenerator;
 import com.mrz.lite.generators.Generator;
 import com.mrz.lite.generators.HelperGenerator;
 import com.mrz.lite.models.EntityModel;
+import com.mrz.lite.util.ProcessorHelper;
 
 @SupportedAnnotationTypes({"com.mrz.lite.annotations.LiteContract"})
 @SupportedSourceVersion(SourceVersion.RELEASE_7)

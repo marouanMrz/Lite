@@ -17,6 +17,7 @@ import com.mrz.lite.annotations.LiteEntity;
 import com.mrz.lite.generators.ContractGenerator;
 import com.mrz.lite.generators.Generator;
 import com.mrz.lite.models.EntityModel;
+import com.mrz.lite.util.ProcessorHelper;
 
 @SupportedAnnotationTypes({"com.mrz.lite.annotations.LiteEntity"})
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
