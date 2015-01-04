@@ -28,8 +28,7 @@ public class ContractGenerator implements Generator {
 			bw.append(" */");
 			bw.newLine();
 			bw.newLine();
-			bw.append("package ");
-			bw.append(entityModel.getPackageName());
+			bw.append("package " + entityModel.getPackageName());
 			bw.append(";");
 			bw.newLine();
 			bw.newLine();

@@ -38,7 +38,7 @@ public class CoreGenerator implements Generator {
 			bw.newLine();
 			bw.append(" * The LiteCore class allows you to build your ");
 			bw.newLine();
-			bw.append(" *  and maintain the database and tables.");
+			bw.append(" * and maintain the database and tables.");
 			bw.newLine();
 			bw.append(" * ");
 			bw.newLine();
@@ -63,16 +63,12 @@ public class CoreGenerator implements Generator {
 			bw.newLine();
 			bw.append("import java.util.Hashtable;");
 			bw.newLine();
-			bw.append("import java.util.LinkedList;");
-			bw.newLine();
 			bw.append("import java.util.Map;");
 			bw.newLine();
 			bw.newLine();
 			bw.append("public class LiteCore extends SQLiteOpenHelper {");
 			bw.newLine();
 			bw.append("    private String uri;");
-			bw.newLine();
-			bw.append("    private LinkedList<?> classes;");
 			bw.newLine();
 			bw.append("    private Hashtable<String, String> sqlCreate;");
 			bw.newLine();
@@ -83,7 +79,6 @@ public class CoreGenerator implements Generator {
 			bw.append("    public static final int DATABASE_VERSION = 1;");
 			bw.newLine();
 			bw.append("    public static final String DATABASE_NAME = \"LiteEmbedded.db\";");
-			bw.newLine();
 			bw.newLine();
 			bw.newLine();
 			bw.append("    public LiteCore(Context context) {");

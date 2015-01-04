@@ -27,8 +27,7 @@ public class HelperGenerator implements Generator {
 			bw.append(" */");
 			bw.newLine();
 			bw.newLine();
-			bw.append("package ");
-			bw.append(entityModel.getPackageName());
+			bw.append("package " + entityModel.getPackageName() + ";");
 			bw.append(";");
 			bw.newLine();
 			bw.newLine();
@@ -57,6 +56,8 @@ public class HelperGenerator implements Generator {
 			bw.newLine();
 			bw.append("    private static final String COMMA_SEP = \",\";");
 			bw.newLine();
+			bw.append("    @SuppressWarnings(\"unused\")");
+			bw.newLine();
 			bw.append("    private static final String SQL_CREATE_" + entityModel.getClassName().toUpperCase() + " =");
 			bw.newLine();
 			bw.append("			\"CREATE TABLE \" + " + entityModel.getClassName() + "Contract.TABLE_NAME +" + "\" (\" +");
@@ -75,6 +76,8 @@ public class HelperGenerator implements Generator {
 				}
 			}
 			bw.append("			\" )\";");
+			bw.newLine();
+			bw.append("    @SuppressWarnings(\"unused\")");
 			bw.newLine();
 			bw.append("    private static final String SQL_DELETE_" + entityModel.getClassName().toUpperCase() +" =");
 			bw.newLine();
