@@ -152,6 +152,8 @@ public class DaoGenerator implements Generator {
 			bw.newLine();
 			bw.append("            ContentValues values = new ContentValues();");
 			bw.newLine();
+			bw.append("            String nullColumnHack = null;");
+			bw.newLine();
 			bw.append("            for (Field field : entityClazz.getFields()) {");
 			bw.newLine();
 			bw.append("                field.setAccessible(true);");
@@ -159,6 +161,8 @@ public class DaoGenerator implements Generator {
 			bw.append("                try {");
 			bw.newLine();
 			bw.append("                    values.put(field.getName(), field.get(object).toString());");
+			bw.newLine();
+			bw.append("                    nullColumnHack = field.getName();");
 			bw.newLine();
 			bw.append("                } catch (IllegalAccessException e) {");
 			bw.newLine();
@@ -174,7 +178,7 @@ public class DaoGenerator implements Generator {
 			bw.newLine();
 			bw.append("            }");
 			bw.newLine();
-			bw.append("            db.insert(entityClazz.getSimpleName(), null, values);");
+			bw.append("            db.insert(entityClazz.getSimpleName(), nullColumnHack, values);");
 			bw.newLine();
 			bw.append("            db.close();");
 			bw.newLine();
