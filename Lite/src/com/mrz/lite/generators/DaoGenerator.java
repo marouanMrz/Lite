@@ -83,7 +83,9 @@ public class DaoGenerator implements Generator {
 			bw.append("    }");
 			bw.newLine();
 			bw.newLine();
-			bw.append("    public List<Object> selectAll() {");
+			bw.append("    @SuppressWarnings(\"unchecked\")");
+			bw.newLine();
+			bw.append("    public <T extends Object> List<T> selectAll() {");
 			bw.newLine();
 			bw.append("        List<Object> all = new LinkedList<Object>();");
 			bw.newLine();
@@ -137,7 +139,7 @@ public class DaoGenerator implements Generator {
 			bw.newLine();
 			bw.append("        db.close();");
 			bw.newLine();
-			bw.append("        return all;");
+			bw.append("        return (List<T>) all;");
 			bw.newLine();
 			bw.append("    }");
 			bw.newLine();
