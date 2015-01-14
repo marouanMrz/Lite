@@ -78,7 +78,7 @@ public class CoreGenerator implements Generator {
 			bw.append("import dalvik.system.DexFile;");
 			bw.newLine();
 			bw.newLine();
-			bw.append("@SuppressLint(\"DefaultLocale\")");
+			bw.append("@SuppressLint({ \"DefaultLocale\", \"NewApi\" })");
 			bw.newLine();
 			bw.append("public class LiteCore extends SQLiteOpenHelper {");
 			bw.newLine();
