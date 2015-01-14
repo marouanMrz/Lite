@@ -185,7 +185,7 @@ public class DaoGenerator implements Generator {
 			bw.append("    }");
 			bw.newLine();
 			bw.append("}");
-			bw.close();
+			bw.close(); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
