@@ -11,6 +11,7 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.TypeMirror;
 import javax.tools.JavaFileObject;
 
 import com.mrz.lite.annotations.LiteContract;
@@ -38,6 +39,13 @@ public class LiteContractProcessor extends AbstractProcessor {
 			if (e.getKind() == ElementKind.CLASS) {
 				entityModel = new EntityModel();
 				TypeElement classElement = (TypeElement) e;
+				Boolean test = false;
+				for (TypeMirror inter : classElement.getInterfaces()) {
+					if (inter.toString().equals("android.provider.BaseColumns")) {
+						test = true;
+					}
+				}
+				if (!test) return false;
 				entityModel.setPackageName(ProcessorHelper.generateDbPackage(classElement.getQualifiedName().toString()));
 				entityModel.setFullQualifiedClassName(ProcessorHelper.generateLiteHelperFullQualifiedClassName(classElement.getQualifiedName().toString()));
 				entityModel.setClassName(ProcessorHelper.generateLiteHelperFullQualifiedClassName(classElement.getSimpleName().toString()));
