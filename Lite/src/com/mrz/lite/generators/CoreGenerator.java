@@ -65,6 +65,14 @@ public class CoreGenerator implements Generator {
 			bw.newLine();
 			bw.append("import java.util.Map;");
 			bw.newLine();
+			bw.append("import java.io.IOException;");
+			bw.newLine();
+			bw.append("import java.util.Enumeration;");
+			bw.newLine();
+			bw.append("import java.util.LinkedList;");
+			bw.newLine();
+			bw.append("import java.util.List;");
+			bw.newLine();
 			bw.append("import dalvik.system.DexFile;");
 			bw.newLine();
 			bw.newLine();
@@ -160,7 +168,9 @@ public class CoreGenerator implements Generator {
 			bw.append("            }");
 			bw.newLine();
 			bw.append("            return classes;");
+			bw.newLine();
 			bw.append("    }");
+			bw.newLine();
 			bw.append("}");
 			bw.close();
 		} catch (Exception e) {
