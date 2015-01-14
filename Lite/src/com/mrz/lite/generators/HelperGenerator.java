@@ -66,14 +66,12 @@ public class HelperGenerator implements Generator {
 			bw.newLine();
 			int size = entityModel.getFields().size();
 			for (int i = 0; i < size; i++) {
-				if (!entityModel.getFields().get(i).getName().toLowerCase().contains("table_name")) {
-					if (i + 1 == size) {
+					if (size - i == 1) {
 						bw.append("			" + entityModel.getClassName() + "Contract." + entityModel.getFields().get(i).getName() + " + TEXT_TYPE +");
 					} else {
 						bw.append("			" + entityModel.getClassName() + "Contract." + entityModel.getFields().get(i).getName() + " + TEXT_TYPE + COMMA_SEP +");
 					}
 					bw.newLine();
-				}
 			}
 			bw.append("			\" )\";");
 			bw.newLine();
