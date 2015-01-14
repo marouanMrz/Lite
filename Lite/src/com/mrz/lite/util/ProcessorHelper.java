@@ -37,6 +37,7 @@ public class ProcessorHelper {
 			} else {
 				fieldModel.setType(field.asType().toString());
 			}
+			if (!fieldModel.getName().toLowerCase().equals("table_name") && !fieldModel.getName().toLowerCase().equals("id"))
 			fields.add(fieldModel);
 		}
 		return fields;
