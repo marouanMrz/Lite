@@ -1,6 +1,9 @@
-Lite
-====
-
+#Lite
 Open Source SQLite Framework for Android App Development
-
-The purpose of this framework is to enhance productivity for Android App developers. Lite Framework enables you to create automatically, the contract class, the SQL Helper, and DAO layer, in order to create some abstraction for the developper and concentrate merely on the business logic.
+## Introduction
+As an Android developer, Lite enhance your productivity, it provide all your needs in the persistence layer and helps you focus merely on the business logic and the presentation layer. Using Lite, you will just annotate your entity, and use immediately DAO methods, all that tough work is already done for you. Lite create automatically:
+* SQLite database.
+* contract class.
+* SQL Helper.
+* DAO layer.<br>
+ 
