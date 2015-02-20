@@ -36,9 +36,9 @@ public class CoreGenerator implements Generator {
 			bw.newLine();
 			bw.append(" * ");
 			bw.newLine();
-			bw.append(" * The LiteCore class allows you to build your ");
+			bw.append(" * The LiteCore class allows you to build and");
 			bw.newLine();
-			bw.append(" * and maintain the database and tables.");
+			bw.append(" * maintain your database and tables.");
 			bw.newLine();
 			bw.append(" * ");
 			bw.newLine();
