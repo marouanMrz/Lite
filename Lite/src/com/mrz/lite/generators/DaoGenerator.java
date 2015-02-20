@@ -214,6 +214,7 @@ public class DaoGenerator implements Generator {
 			bw.newLine();
 			bw.append("    }");
 			bw.newLine();
+			bw.newLine();
 			bw.append("    @SuppressWarnings(\"unchecked\")");
 			bw.newLine();
 			bw.append("    public <T extends Object> List<T> selectByField(String fieldName, String fieldValue) {");
@@ -230,7 +231,7 @@ public class DaoGenerator implements Generator {
 			bw.newLine();
 			bw.append("                for (Object current : all) {");
 			bw.newLine();
-			bw.append("                    if (field.getName() == fieldName && field.get(current).toString() == fieldValue) {");
+			bw.append("                    if (field.getName().equals(fieldName) && field.get(current).toString().equals(fieldValue)) {");
 			bw.newLine();
 			bw.append("                        matchItems.add(current);");
 			bw.newLine();
