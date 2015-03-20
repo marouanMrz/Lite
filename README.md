@@ -36,7 +36,7 @@ public class Person {
 ```
 Amoung the generated source code, you will find the fundemental `LiteDao` class:
 * `LiteDao(Context context, Class<?> entityClass)`<br>
-  usually you instantiate `LiteDao` class from an activity that represent the context, `entityClass` is the Class object of the persisted JavaBean class.
+  Usually you instantiate `LiteDao` class from an activity that represent the context, `entityClass` is the Class object of the persisted JavaBean class.
 * `public int insert(Object object)`<br>
   Insert an object with the type specified in constructor via `entityClass` parameter in the constructor.
 * `public <T extends Object> List<T> selectByField(String fieldName, String fieldValue)`<br>
