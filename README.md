@@ -23,7 +23,7 @@ Check the “Enable Project Specific Settings” and make sure “Enable annotat
 ## Usage
 The `LiteEntity` annotation is all what you need to generate source code, use it on all your JavaBean classes that you want to persist in the embedded SQLite database:
 
-```
+```java
 @LiteEntity
 public class Person {
     private String name;
