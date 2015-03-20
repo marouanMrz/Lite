@@ -14,7 +14,6 @@ As an Android developer, Lite enhance your productivity, it provide all your nee
 * In the properties for your Android project go to Java Compiler -> Annotation Processing
 Check the “Enable Project Specific Settings” and make sure “Enable annotation processing” is checked.
 * Set "src" in the Generated source directory text field to have all the genereated source code in the src directory of your app.<br>
-
 ![cap1](http://img11.hostingpics.net/pics/316936Cap1.png)
 * Go to Factory Path tab under Annotation Processing and add the Lite Jar located in the libs folder of your app.<br>
 ![cap2](http://img11.hostingpics.net/pics/307173Cap2.png)
