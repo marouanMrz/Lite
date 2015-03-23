@@ -14,9 +14,9 @@ As an Android developer, Lite enhance your productivity, it provide all your nee
 * In the properties for your Android project go to Java Compiler -> Annotation Processing
 Check the “Enable Project Specific Settings” and make sure “Enable annotation processing” is checked.
 * Set "src" in the Generated source directory text field to have all the genereated source code in the src directory of your app.<br>
-![cap1](http://img11.hostingpics.net/pics/316936Cap1.png)
+![cap1](http://img15.hostingpics.net/pics/310860Cap1.png)
 * Go to Factory Path tab under Annotation Processing and add the Lite Jar located in the libs folder of your app.<br>
-![cap2](http://img11.hostingpics.net/pics/307173Cap2.png)
+![cap2](http://img15.hostingpics.net/pics/420611Cap2.png)
 * Congratulations, now you are able to use Lite framework.
 
 ## Usage
@@ -44,4 +44,59 @@ Amoung the generated source code, you will find the fundemental `LiteDao` class:
 * `public <T extends Object> List<T> selectAll()`<br>
   Generic method that returns all persisted raws of your JavaBean.
 
+## Examples
+When you choose to use Lite, you choose to delegate a noisy task to the Framework, you juste annotate the bean you want to persist, a DB package is generated for you that contain the SQL schema and all configuration to use SQLite Database in Android environment.
 
+Suppose an Android project in which you have different beans. For the example purpose let suppose you want to perist Books:
+
+```java
+@LiteEntity
+public class Book {
+    private String name;
+    private String author;
+    
+    public Book () {
+    }
+    
+    public Book (String name, String author) {
+        this.name = name;
+        this.author = author;
+    }
+    
+    //Getters & Setters
+}
+```
+In your Activity you will do some CRUD operation like the following: 
+
+```java
+public class MainActivity extends ActionBarActivity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+	}
+
+	public void insert(View v) {
+		EditText nameView = (EditText) findViewById(R.id.name);
+		String name = nameView.getText().toString();
+		EditText authorView = (EditText) findViewById(R.id.author);
+		String author = authorView.getText().toString();
+
+		LiteDao bookDao = new LiteDao(this, Book.class);
+		Book book = new Book(name, author);
+		//Insert a book
+		bookDao.insert(book);
+		//Look for books
+		List<Book> matchItems = clientDao.selectByField("author", "Virginia Woolf");
+		//Get all books
+		List<Book> list = bookDao.selectAll();
+	}
+}
+```
+
+## License
+Copyright 2014-2015 Marouan Marzouga - MRz - Released under the Apache 2.0 license.
+
+
+Made with ❤ by Marouan Marzouga - MRz
