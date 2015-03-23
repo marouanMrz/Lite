@@ -96,7 +96,7 @@ public class MainActivity extends ActionBarActivity {
 ```
 
 ## License
-Copyright 2014-2015 Marouan Marzouga - MRz - Released under the Apache 2.0 license.
+Copyright 2014-2015 Marouan Marzouga - MRz - Released under the [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html).
 
 
 Made with ❤ by Marouan Marzouga - MRz
