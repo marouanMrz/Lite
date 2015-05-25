@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.FIELD)
 public @interface LiteManyToMany {
-	Class<?> mappedBy();
+	String mappedBy();
 }
