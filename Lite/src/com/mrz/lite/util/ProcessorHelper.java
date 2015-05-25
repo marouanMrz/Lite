@@ -42,7 +42,7 @@ public class ProcessorHelper {
 		}
 		return fields;
 	}
-	
+
 	/**
 	 * Return the simple name of field type
 	 * @param fieldType qualified name of type
