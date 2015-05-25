@@ -7,7 +7,8 @@ import javax.tools.JavaFileObject;
 import com.mrz.lite.models.EntityModel;
 
 public class HelperGenerator implements Generator {
-
+	private boolean fkExistence = false;
+	private int fkIndex = 0;
 	@Override
 	public void generate(JavaFileObject jfo, EntityModel entityModel) {
 		try {
@@ -66,13 +67,29 @@ public class HelperGenerator implements Generator {
 			bw.newLine();
 			int size = entityModel.getFields().size();
 			for (int i = 0; i < size; i++) {
-					if (size - i == 1) {
+				if(!entityModel.getFields().get(i).getName().toLowerCase().contains("fk")) {
+					if (size - i == 1 && !fkExistence) {
 						bw.append("			" + entityModel.getClassName() + "Contract." + entityModel.getFields().get(i).getName() + " + TEXT_TYPE +");
-					} else {
+					}
+					if (fkExistence || size - i > 1) {
 						bw.append("			" + entityModel.getClassName() + "Contract." + entityModel.getFields().get(i).getName() + " + TEXT_TYPE + COMMA_SEP +");
 					}
 					bw.newLine();
+				} else {
+					this.fkExistence = true;
+					this.fkIndex = i;
+				}
 			}
+			
+			if(fkExistence) {
+				String type = getClassName(entityModel.getFields().get(fkIndex).getName());
+				bw.append("			" + entityModel.getClassName() + "Contract." + entityModel.getFields().get(fkIndex).getName() + " + \"INTEGER\" + COMMA_SEP +");
+				bw.newLine();
+				bw.append("			" + "\"FOREIGN KEY(\" + " + entityModel.getClassName() + "Contract." + entityModel.getFields().get(fkIndex).getName() + " + \") REFERENCES " 
+						+ type + "(\" + " + type + "Contract._ID + " +"\")\" + ");
+				bw.newLine();
+			}
+			this.fkExistence = false;
 			bw.append("			\" )\";");
 			bw.newLine();
 			bw.append("    @SuppressWarnings(\"unused\")");
@@ -86,5 +103,11 @@ public class HelperGenerator implements Generator {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private String getClassName(String pk) {
+		String name = pk.substring(pk.indexOf("_") + 1, pk.length());
+		char firstLetter = name.charAt(0);
+		return firstLetter + name.substring(1, name.length()).toLowerCase();
 	}
 }
