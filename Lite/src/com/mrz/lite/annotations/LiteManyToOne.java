@@ -8,6 +8,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.FIELD)
-public @interface LiteOneToMany {
-	Class<?> mappedBy();
+public @interface LiteManyToOne {
+	String mappedBy();
 }
