@@ -8,6 +8,7 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.util.ElementFilter;
 
+import com.mrz.lite.annotations.LiteManyToOne;
 import com.mrz.lite.models.FieldModel;
 
 public class ProcessorHelper {
@@ -34,6 +35,9 @@ public class ProcessorHelper {
 			fieldModel.setName(field.getSimpleName().toString());
 			if (field.asType().getKind() == TypeKind.DECLARED) {
 				fieldModel.setType(formatFieldType(field.asType().toString()));
+				if(field.getAnnotation(LiteManyToOne.class) != null){
+					fieldModel.setName("fk_"+field.getAnnotation(LiteManyToOne.class).mappedBy());
+				}
 			} else {
 				fieldModel.setType(field.asType().toString());
 			}
@@ -42,7 +46,7 @@ public class ProcessorHelper {
 		}
 		return fields;
 	}
-
+	
 	/**
 	 * Return the simple name of field type
 	 * @param fieldType qualified name of type
