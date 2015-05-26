@@ -1,6 +1,8 @@
 package com.mrz.lite.generators;
 
 import java.io.BufferedWriter;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.tools.JavaFileObject;
 
@@ -8,7 +10,8 @@ import com.mrz.lite.models.EntityModel;
 
 public class HelperGenerator implements Generator {
 	private boolean fkExistence = false;
-	private int fkIndex = 0;
+	private List<Integer> fkIndex = new LinkedList<Integer>();
+	
 	@Override
 	public void generate(JavaFileObject jfo, EntityModel entityModel) {
 		try {
@@ -77,17 +80,25 @@ public class HelperGenerator implements Generator {
 					bw.newLine();
 				} else {
 					this.fkExistence = true;
-					this.fkIndex = i;
+					this.fkIndex.add(i);
 				}
 			}
 			
 			if(fkExistence) {
-				String type = getClassName(entityModel.getFields().get(fkIndex).getName());
-				bw.append("			" + entityModel.getClassName() + "Contract." + entityModel.getFields().get(fkIndex).getName() + " + \"INTEGER\" + COMMA_SEP +");
-				bw.newLine();
-				bw.append("			" + "\"FOREIGN KEY(\" + " + entityModel.getClassName() + "Contract." + entityModel.getFields().get(fkIndex).getName() + " + \") REFERENCES " 
-						+ type + "(\" + " + type + "Contract._ID + " +"\")\" + ");
-				bw.newLine();
+				for (Integer currentIndex : fkIndex) {
+					String type = getClassName(entityModel.getFields().get(currentIndex).getName());
+					bw.append("			" + entityModel.getClassName() + "Contract." + entityModel.getFields().get(currentIndex).getName() + " + \"INTEGER\" + COMMA_SEP +");
+					bw.newLine();
+					if(fkIndex.indexOf(currentIndex) == fkIndex.size()) {
+						bw.append("			" + "\"FOREIGN KEY(\" + " + entityModel.getClassName() + "Contract." + entityModel.getFields().get(currentIndex).getName() + " + \") REFERENCES " 
+								+ type + "(\" + " + type + "Contract._ID + " +"\")\" + ");
+						bw.newLine();
+					} else {
+						bw.append("			" + "\"FOREIGN KEY(\" + " + entityModel.getClassName() + "Contract." + entityModel.getFields().get(currentIndex).getName() + " + \") REFERENCES " 
+								+ type + "(\" + " + type + "Contract._ID + " +"\")\" + COMMA_SEP +");
+						bw.newLine();
+					}
+				}
 			}
 			this.fkExistence = false;
 			bw.append("			\" )\";");
