@@ -9,6 +9,7 @@ import javax.lang.model.type.TypeKind;
 import javax.lang.model.util.ElementFilter;
 
 import com.mrz.lite.annotations.LiteManyToOne;
+import com.mrz.lite.annotations.LiteOneToOne;
 import com.mrz.lite.models.FieldModel;
 
 public class ProcessorHelper {
@@ -38,10 +39,15 @@ public class ProcessorHelper {
 				if(field.getAnnotation(LiteManyToOne.class) != null){
 					fieldModel.setName("fk_"+field.getAnnotation(LiteManyToOne.class).mappedBy());
 				}
+				if(field.getAnnotation(LiteOneToOne.class) != null){
+					fieldModel.setName("fk_"+field.getAnnotation(LiteOneToOne.class).mappedBy());
+				}
 			} else {
 				fieldModel.setType(field.asType().toString());
 			}
-			if (!fieldModel.getName().toLowerCase().equals("table_name") && !fieldModel.getName().toLowerCase().equals("id"))
+			if (!fieldModel.getName().toLowerCase().equals("table_name") &&
+					!fieldModel.getName().toLowerCase().equals("id") &&
+					!field.asType().toString().contains("<"))
 			fields.add(fieldModel);
 		}
 		return fields;
