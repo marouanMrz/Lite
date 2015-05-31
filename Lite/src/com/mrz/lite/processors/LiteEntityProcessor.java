@@ -40,7 +40,7 @@ public class LiteEntityProcessor extends AbstractProcessor {
 				entityModel.setFullQualifiedClassName(ProcessorHelper.generateFullQualifiedClassName(classElement.getQualifiedName().toString()));
 				entityModel.setPackageName(ProcessorHelper.generateDbPackage(entityModel.getFullQualifiedClassName()));
 				entityModel.setClassName(classElement.getSimpleName().toString());
-				entityModel.setFields(ProcessorHelper.fieldsMapper(classElement));
+				entityModel.setFields(ProcessorHelper.fieldsMapper(processingEnv, classElement, entityModel));
 			}
 		}
 		JavaFileObject jfo = null;

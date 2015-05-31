@@ -49,7 +49,7 @@ public class LiteContractProcessor extends AbstractProcessor {
 				entityModel.setPackageName(ProcessorHelper.generateDbPackage(classElement.getQualifiedName().toString()));
 				entityModel.setFullQualifiedClassName(ProcessorHelper.generateLiteHelperFullQualifiedClassName(classElement.getQualifiedName().toString()));
 				entityModel.setClassName(ProcessorHelper.generateLiteHelperFullQualifiedClassName(classElement.getSimpleName().toString()));
-				entityModel.setFields(ProcessorHelper.fieldsMapper(classElement));
+				entityModel.setFields(ProcessorHelper.fieldsMapper(processingEnv, classElement, entityModel));
 			}
 		}
 		JavaFileObject jfoLiteHelper = null;

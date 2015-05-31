@@ -1,15 +1,22 @@
 package com.mrz.lite.util;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.util.ElementFilter;
+import javax.tools.JavaFileObject;
 
+import com.mrz.lite.annotations.LiteManyToMany;
 import com.mrz.lite.annotations.LiteManyToOne;
 import com.mrz.lite.annotations.LiteOneToOne;
+import com.mrz.lite.generators.ContractGenerator;
+import com.mrz.lite.generators.Generator;
+import com.mrz.lite.models.EntityModel;
 import com.mrz.lite.models.FieldModel;
 
 public class ProcessorHelper {
@@ -28,7 +35,7 @@ public class ProcessorHelper {
 	 * @param classElement TypeElement of kind CLASS
 	 * @return List of FieldModel
 	 */
-	public static List<FieldModel> fieldsMapper(TypeElement classElement){
+	public static List<FieldModel> fieldsMapper(ProcessingEnvironment processingEnv, TypeElement classElement, EntityModel entityModel){
 		List<FieldModel> fields = new LinkedList<FieldModel>();
 		List<VariableElement> variableElements = ElementFilter.fieldsIn(classElement.getEnclosedElements());
 		for (VariableElement field : variableElements) {
@@ -42,6 +49,10 @@ public class ProcessorHelper {
 				if(field.getAnnotation(LiteOneToOne.class) != null){
 					fieldModel.setName("fk_"+field.getAnnotation(LiteOneToOne.class).mappedBy());
 				}
+				if (field.getAnnotation(LiteManyToMany.class) != null) {
+					generateXReferenceContract(processingEnv, field, entityModel);
+					continue;
+				}
 			} else {
 				fieldModel.setType(field.asType().toString());
 			}
@@ -51,6 +62,31 @@ public class ProcessorHelper {
 			fields.add(fieldModel);
 		}
 		return fields;
+	}
+	
+	
+	private static void generateXReferenceContract(ProcessingEnvironment processingEnv,
+			VariableElement field, EntityModel entityModel) {
+		String firstModel = entityModel.getClassName();
+		String secondModel = field.getAnnotation(LiteManyToMany.class).mappedBy();
+		EntityModel xRefModel = new EntityModel();
+		xRefModel.setClassName(firstModel + secondModel);
+		List<FieldModel> fields = new LinkedList<FieldModel>();
+		FieldModel firstField = new FieldModel("fk_" + firstModel, "String");
+		FieldModel secondField = new FieldModel("fk_" + secondModel, "String");
+		fields.add(firstField);
+		fields.add(secondField);
+		xRefModel.setFields(fields);
+		xRefModel.setFullQualifiedClassName(entityModel.getFullQualifiedClassName());
+		xRefModel.setPackageName(entityModel.getPackageName());
+		JavaFileObject jfo = null;
+		try {
+			jfo = processingEnv.getFiler().createSourceFile(xRefModel.getPackageName() + "." + xRefModel.getClassName() + "Contract");
+			Generator generator = new ContractGenerator();
+			generator.generate(jfo, xRefModel);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
