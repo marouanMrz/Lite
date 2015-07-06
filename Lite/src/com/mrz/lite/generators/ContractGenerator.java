@@ -66,8 +66,6 @@ public class ContractGenerator implements Generator {
 			bw.newLine();
 			bw.append("    public static final String TABLE_NAME = \"" + entityModel.getClassName() + "\";");
 			bw.newLine();
-			bw.append("    public static final String ID = \"" + entityModel.getClassName().toLowerCase() + "_id\";");
-			bw.newLine();
 			for (FieldModel field : entityModel.getFields()) {
 				bw.append("    public static final String " + field.getName().toUpperCase() + " = \"" + field.getName() + "\";");
 				bw.newLine();
