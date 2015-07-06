@@ -199,7 +199,7 @@ public class DaoGenerator implements Generator {
 			bw.newLine();
 			bw.append("                try {");
 			bw.newLine();
-			bw.append("                    if(field.getAnnotation(LiteOneToOne.class) != null) {");
+			bw.append("                    if(field.isAnnotationPresent(LiteOneToOne.class)) {");
 			bw.newLine();
 			bw.append("                        long fk = insert(field.get(object));");
 			bw.newLine();
@@ -209,7 +209,7 @@ public class DaoGenerator implements Generator {
 			bw.newLine();
 			bw.append("                    }");
 			bw.newLine();
-			bw.append("                    if (field.getAnnotation(LiteManyToOne.class) != null) {");
+			bw.append("                    if (field.isAnnotationPresent(LiteManyToOne.class)) {");
 			bw.newLine();
 			bw.append("                        long fk = insert(field.get(object));");
 			bw.newLine();
@@ -219,7 +219,7 @@ public class DaoGenerator implements Generator {
 			bw.newLine();
 			bw.append("                    }");
 			bw.newLine();
-			bw.append("                    if (field.getAnnotation(LiteManyToMany.class) != null) {");
+			bw.append("                    if (field.isAnnotationPresent(LiteManyToMany.class)) {");
 			bw.newLine();
 			bw.append("                        mtom = true;");
 			bw.newLine();
