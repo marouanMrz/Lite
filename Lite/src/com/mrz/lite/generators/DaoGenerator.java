@@ -53,8 +53,6 @@ public class DaoGenerator implements Generator {
 			bw.newLine();
 			bw.append("import java.lang.reflect.Method;");
 			bw.newLine();
-			bw.append("import java.lang.reflect.InvocationTargetException;");
-			bw.newLine();
 			bw.append("import java.util.LinkedList;");
 			bw.newLine();
 			bw.append("import java.util.List;");
