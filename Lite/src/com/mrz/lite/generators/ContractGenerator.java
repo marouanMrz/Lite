@@ -1,6 +1,7 @@
 package com.mrz.lite.generators;
 
 import java.io.BufferedWriter;
+import java.util.regex.Pattern;
 
 import javax.tools.JavaFileObject;
 
@@ -66,9 +67,12 @@ public class ContractGenerator implements Generator {
 			bw.newLine();
 			bw.append("    public static final String TABLE_NAME = \"" + entityModel.getClassName() + "\";");
 			bw.newLine();
+			String className = entityModel.getClassName().toLowerCase();
 			for (FieldModel field : entityModel.getFields()) {
-				bw.append("    public static final String " + field.getName().toUpperCase() + " = \"" + field.getName() + "\";");
-				bw.newLine();
+				if (!Pattern.matches(className+"id|id"+className+"|_id|id_", field.getName().toLowerCase())) {
+					bw.append("    public static final String " + field.getName().toUpperCase() + " = \"" + field.getName() + "\";");
+					bw.newLine();
+				}
 			}
 			bw.append("}");
 			bw.close();
