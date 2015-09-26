@@ -86,9 +86,11 @@ public class HelperGenerator implements Generator {
 			
 			if(fkExistence) {
 				for (Integer currentIndex : fkIndex) {
-					String type = getClassName(entityModel.getFields().get(currentIndex).getName());
 					bw.append("			" + entityModel.getClassName() + "Contract." + entityModel.getFields().get(currentIndex).getName() + " + \" INTEGER\" + COMMA_SEP +");
 					bw.newLine();
+				}
+				for (Integer currentIndex : fkIndex) {
+					String type = getClassName(entityModel.getFields().get(currentIndex).getName());
 					if(fkIndex.indexOf(currentIndex) + 1 == fkIndex.size()) {
 						bw.append("			" + "\"FOREIGN KEY(\" + " + entityModel.getClassName() + "Contract." + entityModel.getFields().get(currentIndex).getName() + " + \") REFERENCES " 
 								+ type + "(\" + " + type + "Contract._ID + " +"\")\" + ");
