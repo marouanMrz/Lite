@@ -181,7 +181,7 @@ public class DaoGenerator implements Generator {
 			bw.newLine();
 			bw.append("                            if (idFieldToGet.get(field.get(object)).equals(0)) {");
 			bw.newLine();
-			bw.append("                                long fk = insert(field.get(object));");
+			bw.append("                                long fk = insertOrUpdate(field.get(object));");
 			bw.newLine();
 			bw.append("                                values.put(\"fk_\" + mappedBy, fk);");
 			bw.newLine();
@@ -217,7 +217,7 @@ public class DaoGenerator implements Generator {
 			bw.newLine();
 			bw.append("                                if (idFieldToGet.get(obj).equals(0)) {");
 			bw.newLine();
-			bw.append("                                    long fk_left = insert(obj);");
+			bw.append("                                    long fk_left = insertOrUpdate(obj);");
 			bw.newLine();
 			bw.append("                                    fks_left.add(fk_left);");
 			bw.newLine();

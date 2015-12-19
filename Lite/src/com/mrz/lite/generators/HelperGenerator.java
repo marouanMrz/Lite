@@ -65,12 +65,16 @@ public class HelperGenerator implements Generator {
 			bw.append("    private static final String SQL_CREATE_" + entityModel.getClassName().toUpperCase() + " =");
 			bw.newLine();
 			bw.append("			\"CREATE TABLE \" + " + entityModel.getClassName() + "Contract.TABLE_NAME +" + "\" (\" +");
-			bw.newLine();
-			bw.append("			" + entityModel.getClassName() + "Contract._ID +" + "\" INTEGER PRIMARY KEY AUTOINCREMENT,\" +");
-			bw.newLine();
 			int size = entityModel.getFields().size();
+			boolean done = false;
 			for (int i = 0; i < size; i++) {
 				if(!entityModel.getFields().get(i).getName().toLowerCase().contains("fk")) {
+					if(!done) {
+						bw.newLine();
+						bw.append("			" + entityModel.getClassName() + "Contract._ID +" + "\" INTEGER PRIMARY KEY AUTOINCREMENT,\" +");
+						bw.newLine();
+						done = true;
+					}
 					if (size - i == 1 && !fkExistence) {
 						bw.append("			" + entityModel.getClassName() + "Contract." + entityModel.getFields().get(i).getName() + " + TEXT_TYPE +");
 					}
@@ -86,7 +90,20 @@ public class HelperGenerator implements Generator {
 			
 			if(fkExistence) {
 				for (Integer currentIndex : fkIndex) {
+					bw.newLine();
 					bw.append("			" + entityModel.getClassName() + "Contract." + entityModel.getFields().get(currentIndex).getName() + " + \" INTEGER\" + COMMA_SEP +");
+				}
+				if (fkIndex.size() == size) {
+					bw.newLine();
+					bw.append("			\"PRIMARY KEY (\" + ");
+					for (Integer currentIndex : fkIndex) {
+						if(fkIndex.indexOf(currentIndex) + 1 == fkIndex.size()) {
+							bw.append(entityModel.getClassName() + "Contract." + entityModel.getFields().get(currentIndex).getName() + " + \")\" + COMMA_SEP +");
+						} else {
+							bw.append(entityModel.getClassName() + "Contract." + entityModel.getFields().get(currentIndex).getName());
+							bw.append(" + \", \" + ");
+						}
+					}
 					bw.newLine();
 				}
 				for (Integer currentIndex : fkIndex) {
